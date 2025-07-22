@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>孕婦食物查詢</title></head>
+<body>
+  <h2>孕婦食物禁忌查詢</h2>
+  <input id="question" type="text" placeholder="請輸入問題" style="width:300px"/>
+  <button onclick="ask()">查詢</button>
+  <p id="answer"></p>
+
+  <script>
+    async function ask() {
+      const question = document.getElementById('question').value;
+      const res = await fetch("https://anything-llm-a8x6.onrender.com/api/v1/workspaces/pregnant-food/chat", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer XSHRJCB-ZEQMWHK-M1W7T33-CNPR9FJ",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: question })
+      });
+      const data = await res.json();
+      document.getElementById('answer').innerText = data.response || '無回應';
+    }
+  </script>
+</body>
+</html>
